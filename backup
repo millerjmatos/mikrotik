@@ -1,0 +1,36 @@
+#  1º Método #  
+
+    New Terminal
+
+        export file=backup01
+
+        ou
+
+        export file=backup02 terse
+
+    Files 
+
+ #  2º Método #  
+
+    Files > Backup
+
+ #  Fazer o download dos arquivos clicando com o botão esquerdo do mouse. #  
+
+ #  Agendando o backup e enviando por e-mail. #  
+
+    System > Scripts > Script List > Add
+
+        Name: backup-do-dia
+
+    Source:
+
+/export file=bkp-daily terse
+/tool e-mail send to=contato@mullertec.com.br subject="$[/system identity get name] export" body="$[/system clock get date] configuration file" file=bkp-daily.rsc
+
+    System > Scheduler > Add
+
+        Name: Backup
+
+        Interval: 1d 00:00:00
+
+        On Event: backup-do-dia
