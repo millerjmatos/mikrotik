@@ -1,0 +1,66 @@
+//Priorizando VoIP.//
+
+//Supondo que o nosso servidor VoIP é 200.155.174.203//
+
+//Primeiro vamos marcar as conexões e por fim o pacote para então criar a fila de prioridade.//
+
+	IP > Firewall > Mangle > Add
+
+	New Mangle Rule > General
+
+		Chain: prerouting
+
+		Src. Address: 200.155.174.203
+
+	Action
+
+		Action: mark connection
+
+		New Connection Mark: VoIP-conn
+
+		Passthrough: OK
+
+	IP > Firewall > Mangle > Add
+
+	New Mangle Rule > General
+
+		Chain: prerouting
+
+		Dst. Address: 200.155.174.203
+
+	Action
+
+		Action: mark connection
+
+		New Connection Mark: VoIP-conn
+
+		Passthrough: OK
+
+	IP > Firewall > Mangle > Add
+
+	New Mangle Rule > General
+
+		Chain: prerouting
+
+		Connection Mark: VoIP-conn
+
+	Action
+
+		Action: mark packet
+
+		New Connection Mark: VoIP-mark
+
+		Passthrough: NO
+
+	Queues > Queue List > Simple Queues > Add
+
+	General
+
+		Name: VoIP-traffic
+
+	Advanced
+		Packet Marks: VoIP-mark
+
+		Max Limit: unlimited unlimited 
+
+		Priority: 2 2

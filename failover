@@ -1,0 +1,50 @@
+New Terminal
+
+ip route comment=WAN1 dst-address=0.0.0.0/24 gateway=189.112.125.134 distance=1
+
+ip route comment=WAN2 dst-address=0.0.0.0/24 gateway=201.76.189.185 distance=2
+
+	IP > Routes > Add
+
+		Dst. Address: 8.8.4.4
+
+		Gateway: WAN1
+
+		Distance: 1
+
+		Comment: MONITORA
+
+	Tools > Netwatch > Add
+
+	New Netwatch Host > Host
+
+		Host: 8.8.4.4
+
+		Interval: 00:00:12
+
+		Timeout: 100
+
+	New Netwatch Host > Up
+
+		/ip route enable [find comment="WAN1"]
+
+	New Netwatch Host > Down
+
+		/ip route disable [find comment="WAN1"]
+
+//ou//
+
+/tool netwatch
+add down-script="/ip route disable [find comment=\"WAN1\"]" host=8.8.4.4 interval=10s timeout=150ms up-script="/ip route enable [find comment=\"WAN1\"]"
+
+	IP > Firewall
+
+		Chain: output
+
+		Dst. Address: 8.8.4.4
+
+		Protocol: icmp
+
+		Out. Interface: WAN2
+
+		Action: drop 

@@ -1,0 +1,33 @@
+IP > DNS > DNS Settings
+
+		Servers: # Deixe em branco se preferir, vamos ATRIBUIR em "IP > DHCP Server > Networks". #
+
+		Allow Remote Requests: OK # Você está habilitando seu RB como um cache de DNS. #
+
+	IP > DHCP Server > Networks
+
+	DHCP Network < rede >
+
+		DNS Servers: 10.0.0.10 # Controlador de Domínio! 
+
+		DNS Servers: 208.67.222.222, 208.67.220.220 # Adicione os servidores de consulta da sua preferência. #
+
+# Forçando as consultas da LAN para a RB. #
+
+	IP > Firewall > NAT > New NAT Rule
+
+		General
+
+			Chain: dstnat
+
+			Protocol: udp
+
+			Dst. Port: 53
+
+			In. Interface: "!" e1-WAN
+
+		Action
+
+			Action: redirect
+
+			To Ports: 53

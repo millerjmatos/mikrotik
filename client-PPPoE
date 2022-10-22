@@ -1,0 +1,31 @@
+PPP > Interface > PPPoE client
+
+    General
+
+        Name: pppoe-operadora
+
+        Interfaces: eth2-ati
+
+    Dial Out
+
+        User: ati
+
+        Password: secret-123456
+
+        User Peer DNS: OK/NO
+
+        Add Defaul Rout: NO //Vamos configurar a rota em modo estático.//
+
+        Default Route Distance: 1/2
+
+        Allow: 
+    
+        mschap1, mschap2, chap, pap: OK //Depende da operadora.//
+
+IP > Routes > Add
+
+    Dst. Address: 0.0.0.0/0
+
+    Gateway: pppoe-operadora
+
+    Distance: 1/2

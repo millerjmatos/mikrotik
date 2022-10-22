@@ -1,0 +1,45 @@
+// Somente funciona para HTTP.  Modo Transparente.//
+
+	New Terminal
+
+/ip firewall nat add chain=dsnat protocol=tcp dst-port:80 action=redirect to-ports=8080
+
+// ou.. //
+
+	IP > Web Proxy
+
+	General
+
+		Enabled: OK
+
+		Src. Address: 10.0.0.1
+
+		Port: 8080
+
+		Anonymous: X
+
+		Cache On Disk: OK
+
+	IP > Firewall > NAT > Add
+
+	General
+
+		Chain: dstnat
+
+		Protocol: tcp
+
+		Dst. Port: 80
+
+	Action
+
+		Action: redirect
+
+		To Ports: 8080
+
+// Adicionando os domínios a serem filtrados. //
+
+	IP > Web Proxy > Access > Web Proxy Access > Add
+
+		Dst. Host: *facebook*
+
+		Action: deny

@@ -1,0 +1,232 @@
+Bridge > Add
+
+	General
+
+		Name: Loopback
+
+	IP > Addresses > Add
+
+		Address: 172.16.0.1 // IP do concentrador da VPN. //
+
+		Network: 172.16.0.0
+
+		Interface: Loopback
+
+	IP > Pool > Add
+
+	New IP Pool
+
+		Name: remote-l2tp
+
+		Addresses: 172.16.0.2-172.16.0.31 // Netmask: 255.255.255.224 = 27 //
+
+	PPP > Profiles
+
+	PPP Profile <default-encryption>
+
+		Local Address: 172.16.0.1 //Loopback//
+
+		Remote Address: remote-l2tp
+
+	PPP > Interface > L2TP Server
+
+	General
+
+		Enabled: OK
+
+		Authentication: mschap2, mschap1, chap
+
+		Use IPsec: required
+
+		IPsec Secret: N5o5YKQaqjjZAdFbZZ0qYedsDNHcfjgnYiSlBiP4Fzal4980xa7FtrN5DySFwGyg
+
+		One Session Per Host: OK
+
+	PPP > Secrets > Add
+
+		Name: mullertec
+
+		Pass: WOm8TWi2dbVcoCIixNDMaApv
+
+		Service: l2tp
+
+		Profile: default-encryption
+// COMO NAVEGAR NA INTERNET LOCAL NO WINDOWS //
+
+	Conexões de Rede
+
+// Botão direito no ícone da rede da VPN e ir em Propriedades. //
+
+	Rede > Protocolo IP Versão 4 (TCP/IPv4) > Propriedades > Avançado > Configurações IP
+
+		Utilizar gateway padrão em rede remota: NO
+
+// Criar a rota no cmd do Windows como Administrador: //
+
+	route add 10.0.0.0 mask 255.255.255.0 172.16.0.1 -p
+
+//	route add <rede de destino> <gateway de destino "Loopback | Local Address"> //
+
+	route print // Listando as rotas. //
+
+	route delete "IP da rede"
+
+------------------------------------------------------------
+_	VPN OPENVPN (CLIENT-TO-SITE)
+------------------------------------------------------------
+
+	New Terminal
+
+// CRIAR //
+
+/certificate 
+add name=ca-server common-name=ca-server days-valid=3650 key-size=2048 key-usage=crl-sign,key-cert-sign,content-commitment,digital-signature
+
+add name=crt-server common-name=10.0.0.1 days-valid=3650 key-size=2048 key-usage=digital-signature,key-encipherment,tls-server
+
+add name=crt-user1 common-name=crt-user1 days-valid=3650 key-size=2048 key-usage=tls-client
+
+// ASSINAR //
+
+/certificate 
+sign ca-server ca-crl-host=10.0.0.1
+sign crt-server ca=ca-server
+sign crt-user1 ca=ca-server
+
+// EXPORTAR //
+
+/certificate 
+export-certificate ca-server export-passphrase=""
+export-certificate crt-user1 export-passphrase="22058080"
+
+	System > Certificates
+
+// Marcar os certificados como Trusted. //
+
+	Files
+
+// Exportar os 3 arquivos: "ca.crt", "crt-user.crt" e "crt-muller.key". //
+
+	IP > Pool > Add > New IP Pool
+
+		Name: ovpn01
+
+		Addresses: 172.16.0.2-172.16.0.10
+
+		Next Pool: none
+
+	PPP > Profiles > Add > New PPP Profile
+
+	General
+
+		Name: matriz
+
+		Local Address: 172.16.0.1
+
+		Remote Address: ovpn01
+
+		Change TCP MSS: yes
+
+		Use UPnP: no
+
+	Protocols
+
+		Use IPv6: no
+
+		Use MPLS: no
+
+		Use Compression: yes
+
+		Use Encryption: yes
+
+	Limits
+
+		Session Timeout: 08:00:00
+
+		Idle Timeout: 04:00:00
+
+		Only One: no // no = permite autenticação simultânea; yes = apenas uma sessão por vez. //
+
+	PPP > Secrets > Add
+
+	New PPP Secret
+
+		Name: user
+
+		Password: 12345
+
+		Service: ovpn
+
+		Profile: matriz
+
+	PPP > Interface > OVPN Server
+
+		Enabled: OK
+
+		Port: 51194
+
+		Mode: ip // ip=tun, ethernet=tap //
+
+		Protocol: tcp
+
+		Netmask: 24
+
+		Default Profile: matriz
+
+		Certificate: crt-server
+
+		Require Client Certificate: OK
+
+		Auth: sha1
+
+		Chiper: aes 256
+
+	IP > Firewall > Filter Rules > Add
+
+	General
+
+		Chain: input
+
+		Protocol: tcp
+
+		Dst. Port: 51194
+
+	Action
+
+		Action: accept
+
+// Vamos ao modelo de arquivo de configuração .ovpn.. //
+
+client
+dev tun
+proto tcp
+remote >>mymikrotik.ddns.net<< >>51194<<
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+auth SHA1
+verb 3
+route >>10.0.0.0<< 255.255.255.0 >>172.16.0.1<<
+
+<ca>
+// Colar aqui a CA. //
+</ca>
+
+<crt>
+// Colar aqui o Certificado do cliente. //
+</crt>
+
+<key>
+// 
+
+Colar aqui a chave privada do cliente com a senha assinada, vamos usar o OpenSSL.
+
+Chamar o openssl.exe dentro da pasta com a .key não assinada. No Windows: atalho "SHIFT + Mouse2" dentro da pasta e clicar em Abrir janela do PowerShell aqui
+
+rsa -in >>NomeArquivo.key<< -out >>NovoNomeArquivo.key<<
+
+//
+</key>

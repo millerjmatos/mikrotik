@@ -1,0 +1,23 @@
+IP > DHCP Client > Add
+    
+        Interface: eth3-WAN
+        
+        User Peer DNS: OK/NO
+        
+        User Peer NTP: NO
+        
+        Add Default Route: yes //Vamos configurar a rota em modo estático. Voltaremos aqui para excluir, depois de criado a rota estática.//
+
+//Descoberto o Gateway vamos fixar um IP e criar a rota.//
+
+IP > Address > Add
+
+        Address: 192.168.0.200/24 //Definir um IP válido dessa LAN, configurar o DMZ e fixar esse IP no modem.//
+
+        Interface: eth3-claro
+
+IP > Routes > Add
+
+        Dst: Address: 0.0.0.0/0
+
+        Gateway: 192.168.0.2 //IP do modem que descobrimos. Se fosse um link PPPoE selecionaria a interface PPPoE.//

@@ -1,0 +1,32 @@
+IP > Firewall > Filter Rules > Add
+
+	General
+
+		Chain: forward // Tudo que passa pelo Firewall. //
+
+		Protocol: tcp
+
+	Advanced
+		TLS Host: *facebook*
+
+	Action
+
+		Action: add dst to address list
+
+	Address List: Redes Sociais
+
+	Timeout: 30d 00:00:00
+
+	IP > Firewall > Filter Rules > Add
+
+	General
+
+		Chain: forward
+
+	Advanced
+
+		Dst. Address List: Redes Sociais
+
+	Action
+
+		Action: Reject

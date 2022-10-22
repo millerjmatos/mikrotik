@@ -1,0 +1,19 @@
+PPP > Interface > Add > L2TP Client
+
+	General
+
+		Name: l2tp-matriz
+
+	Dial Out
+
+		Connect To: x7x90xd7fdfx.sn.mynetname.net
+
+		User: empresa-user01
+
+		Password: ysL7G+2DjxG*aRqBHhnf452<
+
+		Profile: default-encryption
+
+		Use IPsec: OK
+
+		IPsec Secret: +Sx6RlrZVSW3sARB+BbQuzarxBGMhl7r7l!U<MQRPwXAO+!b4*=a=*usv<O6JBex

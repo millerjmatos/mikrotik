@@ -1,0 +1,31 @@
+New Terminal
+
+/ip firewall layer7-protocol add name=facebook regexp=facebook
+
+/ip firewall filter add action=drop chain=forward protocol=tcp comment="facebook" disabled=no dst-port=80,443 layer7-protocol=facebook
+
+// ou..
+
+	IP > Firewall  > Layer7 Protocols > Add
+
+		Name: facebook
+
+		Regexp: facebook
+
+	Filter Rules > Add
+
+	General
+
+		Chain: forward
+
+		Protocol: tcp
+
+		Dst. Port: 80,443
+
+	Advanced
+
+		Layer7 Protocol: facebook
+
+	Action
+
+		Action: reject

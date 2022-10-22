@@ -1,0 +1,21 @@
+// Ex. acessando via MS RDP: //
+
+IP > Firewall > NAT > New NAT Rule
+
+	General
+
+		Chain: dstnat
+
+		Protocol: tcp
+
+		Dst. Port: 3389
+
+		In. Interface: e1-WAN
+
+	Action
+
+		Action: dst-nat
+
+		To Addresses: 10.0.0.199
+
+		To Ports: 3389 // Pode ficar vazio se for igual a porta "Dst. Port". //

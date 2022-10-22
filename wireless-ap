@@ -1,0 +1,107 @@
+------------------------------------------------------------
+_	CONFIGURAR AP
+------------------------------------------------------------
+
+	Wireless > Security Profiles > Add
+
+		Name: PROFILE-AP01
+
+		Mode: dynamic keys
+
+		Authentication Types: WPA2 PSK
+
+		Unicast Ciphers: aes ccm
+
+		Group Ciphers: aes ccm
+
+		WPA2 Pre-Shared Key: senhasegura!
+
+	Wireless > WiFi Interfaces > <WLAN1> > Wireless
+
+		Mode: ap bridge
+
+		Band: 2GHz-B/G/N
+
+		Channel Width: 20/40MHz XX
+
+		Frequency: auto
+
+		SSID: WIFI-MIKROTIK
+
+		Security Profile: PROFILE-AP01
+
+		WPS Mode: disabled
+
+		Default Authentication: OK
+
+		Default Forward: OK
+
+	Bridge > Add
+
+		Name: bridge1
+
+	Bridge > Ports > Add
+
+	General
+
+		Interface: WLAN1
+
+		Bridge: bridge1
+
+	Bridge > Ports > Add
+
+	General
+
+		Interface: ETH-LAN
+
+		Bridge: bridge1
+
+//Configurar o DHCP client para a interface bridge1.//
+
+//Criando a rede de visitante://
+
+	Wireless > Security Profiles > Add
+
+		Name: PROFILE-VISITANTE
+
+		Mode: dynamic keys
+
+		Authentication Types: WPA2 PSK
+
+		Unicast Ciphers: aes ccm
+
+		Group Ciphers: aes ccm
+
+		WPA2 Pre-Shared Key: senhasegura!
+
+	Wireless > WiFi Interfaces > Add > Virtual > Wireless
+
+		Mode: ap bridge
+
+		Band: 2GHz-B/G/N
+
+		Channel Width: 20/40MHz XX
+
+		Frequency: auto
+
+		SSID: WIFI-VISITANTE
+
+		Master Interface: WLAN1
+
+		Security Profile: PROFILE-VISITANTE
+
+		WPS Mode: disabled
+
+		Default Authentication: OK
+
+		Default Forward: OK
+
+	IP > Addresses > Address List > Add
+
+		Address: 172.22.0.1/24
+
+		Interface: WLAN2
+
+//Configurar o DHCP Server para a interface virtual WLAN2.//
+
+//Configurar o srcnat para a interface de saída bridge1 como masquerade.//

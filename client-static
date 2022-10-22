@@ -1,0 +1,26 @@
+------------------------------------------------------------
+_	CONFIGURAR IP ESTÁTICO
+------------------------------------------------------------
+
+	IP > Addresses > Add
+
+	New Address
+
+		Address: 201.76.89.186/29
+
+		Interface: eth2-mvox
+
+	IP > Routes
+
+	Route List > Add > New Route
+
+		Dst. Address: 0.0.0.0/0
+
+		Gateway: 201.76.89.185 # O primeiro ou último IP geralmente fica com o ISP. #
+
+		Comment: WAN1
+
+# O mesmo que: #
+
+/ip address add address=201.76.189.186/29 interface=eth2-mvox network=201.76.89.184
+/ip route add comment=WAN1 distance=1 gateway=201.76.89.185
