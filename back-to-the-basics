@@ -1,0 +1,119 @@
+------------------------------------------------------------
+_	TROCAR LOGIN E SENHA
+------------------------------------------------------------
+
+	System > Users
+
+		Group: full
+
+------------------------------------------------------------
+_	ATUALIZAR O SISTEMA
+------------------------------------------------------------
+
+	System > Packages > Package List > Check For Updates
+
+	Channel: stable
+
+	Check For Uodates > Download&Install
+
+------------------------------------------------------------
+_	RESTRINGINDO ACESSO
+------------------------------------------------------------
+
+	IP > Services > IP Service List
+
+# Recomendável desabilitar todos os serviços que não serão utilizados e trocar portas dos que forem utilizados. #
+
+	IP Service <www>
+
+	Port: 11443
+
+	Available From: 10.0.0.0/24 # Apenas para a rede LAN!!! #
+
+------------------------------------------------------------
+_	RENOMEAR INTERFACES
+------------------------------------------------------------
+
+	New Terminal
+
+# Exemplo: #
+
+/interface ethernet set [ find default-name=ether1 ] name=eth1-lan
+/interface ethernet set [ find default-name=ether2 ] name=eth2-mvox
+/interface ethernet set [ find default-name=ether3 ] disabled=yes name=eth3
+/interface ethernet set [ find default-name=ether4 ] name=eth4-algar
+/interface ethernet set [ find default-name=ether5 ] disabled=yes name=eth5
+
+# Descobrindo o nome das portas físicas ethernet: #
+
+/interface ethernet export
+
+------------------------------------------------------------
+_	CRIANDO A LISTAS DE INTERFACES
+------------------------------------------------------------
+
+/interface list add name=FORNECEDORES
+
+# Adicionando as interfaces na lista FORNECEDORES: #
+
+	Interfaces > Interface List > Add
+
+	New Interface List Member
+
+		List: FORNECEDORES
+
+		Interface: eth2-mvox
+
+	Interfaces > Interface List > Add
+
+	New Interface List Member
+
+		List: FORNECEDORES
+
+		Interface: eth4-algar
+
+------------------------------------------------------------
+_	ATRIBUIR IP (LAN)
+------------------------------------------------------------
+
+	IP > Addresses > Add
+
+	New Address
+
+		Address: 10.0.0.1/24
+
+		Interface: eth1-lan
+
+------------------------------------------------------------
+_	SNAT
+------------------------------------------------------------
+
+// No modo DHCP: //
+
+	IP > Firewall > NAT > Add
+
+	General
+
+		Chain: srcnat
+
+	Action
+
+		Action: masquerade
+
+------------------------------------------------------------
+_	Cliente NTP
+------------------------------------------------------------
+
+	System > NTP Client
+
+		Enabled: OK
+
+		Mode: unicast
+
+		NTP Server: gps.ntp.br
+
+	System > NTP Server
+
+		Enabled, Broadcast, Multicast, Manycast: OK
+
+		Broadcast Address: 10.0.0.255
