@@ -30,26 +30,26 @@ Criando a vlan:
 
 // No switch vamos criar a bridge. //
 
-    Bridge > Add
+    Bridge > Bridge > Add
 
         General
 
             Name: bridge-LAN
 
-// Adicionando as interfaces (uma por uma) que fazem parte da bridge. //
+// Adicionando as interfaces (uma por uma) que fazem parte da bridge: //
 
-    Ports > Add
+    Bridge > Ports > Add
 
-// Adicionando as interfaces da bridge na vlan que desejamos. //
+// Adicionando as interfaces da bridge na vlan que desejamos: //
 // Acesse a interface.. //
 
-    Bridge Port
+    Bridge > Ports > Bridge Port
 
         VLAN
 
             PVID: 200
 
-    Bridge > VLANS > Add
+    Bridge > VLANs > Add
 
         New Bridge VLAN
 
