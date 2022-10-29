@@ -20,7 +20,7 @@ _	CONFIGURAR IP ESTÁTICO
 
 		Comment: WAN1
 
-# O mesmo que: #
+# O mesmo que:
 
 /ip address add address=201.76.189.186/29 interface=eth2-mvox network=201.76.89.184
 /ip route add comment=WAN1 distance=1 gateway=201.76.89.185

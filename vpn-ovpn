@@ -6,7 +6,7 @@ Bridge > Add
 
 	IP > Addresses > Add
 
-		Address: 172.16.0.1 // IP do concentrador da VPN. //
+		Address: 172.16.0.1 # IP do concentrador da VPN. #
 
 		Network: 172.16.0.0
 
@@ -18,13 +18,13 @@ Bridge > Add
 
 		Name: remote-l2tp
 
-		Addresses: 172.16.0.2-172.16.0.31 // Netmask: 255.255.255.224 = 27 //
+		Addresses: 172.16.0.2-172.16.0.31 # Netmask: 255.255.255.224 = 27 #
 
 	PPP > Profiles
 
 	PPP Profile <default-encryption>
 
-		Local Address: 172.16.0.1 //Loopback//
+		Local Address: 172.16.0.1 #Loopback#
 
 		Remote Address: remote-l2tp
 
@@ -51,23 +51,24 @@ Bridge > Add
 		Service: l2tp
 
 		Profile: default-encryption
-// COMO NAVEGAR NA INTERNET LOCAL NO WINDOWS //
+
+# COMO NAVEGAR NA INTERNET LOCAL NO WINDOWS
 
 	Conexões de Rede
 
-// Botão direito no ícone da rede da VPN e ir em Propriedades. //
+# Botão direito no ícone da rede da VPN e ir em Propriedades.
 
 	Rede > Protocolo IP Versão 4 (TCP/IPv4) > Propriedades > Avançado > Configurações IP
 
 		Utilizar gateway padrão em rede remota: NO
 
-// Criar a rota no cmd do Windows como Administrador: //
+# Criar a rota no cmd do Windows como Administrador: #
 
 	route add 10.0.0.0 mask 255.255.255.0 172.16.0.1 -p
 
-//	route add <rede de destino> <gateway de destino "Loopback | Local Address"> //
+	route add <rede de destino> <gateway de destino "Loopback | Local Address">
 
-	route print // Listando as rotas. //
+	route print # Listando as rotas. #
 
 	route delete "IP da rede"
 
@@ -77,7 +78,7 @@ _	VPN OPENVPN (CLIENT-TO-SITE)
 
 	New Terminal
 
-// CRIAR //
+# CRIAR
 
 /certificate 
 add name=ca-server common-name=ca-server days-valid=3650 key-size=2048 key-usage=crl-sign,key-cert-sign,content-commitment,digital-signature
@@ -86,14 +87,14 @@ add name=crt-server common-name=10.0.0.1 days-valid=3650 key-size=2048 key-usage
 
 add name=crt-user1 common-name=crt-user1 days-valid=3650 key-size=2048 key-usage=tls-client
 
-// ASSINAR //
+# ASSINAR
 
 /certificate 
 sign ca-server ca-crl-host=10.0.0.1
 sign crt-server ca=ca-server
 sign crt-user1 ca=ca-server
 
-// EXPORTAR //
+# EXPORTAR
 
 /certificate 
 export-certificate ca-server export-passphrase=""
@@ -101,11 +102,11 @@ export-certificate crt-user1 export-passphrase="22058080"
 
 	System > Certificates
 
-// Marcar os certificados como Trusted. //
+# Marcar os certificados como Trusted.
 
 	Files
 
-// Exportar os 3 arquivos: "ca.crt", "crt-user.crt" e "crt-muller.key". //
+# Exportar os 3 arquivos: "ca.crt", "crt-user.crt" e "crt-muller.key".
 
 	IP > Pool > Add > New IP Pool
 
@@ -145,7 +146,7 @@ export-certificate crt-user1 export-passphrase="22058080"
 
 		Idle Timeout: 04:00:00
 
-		Only One: no // no = permite autenticação simultânea; yes = apenas uma sessão por vez. //
+		Only One: no # no = permite autenticação simultânea; yes = apenas uma sessão por vez. #
 
 	PPP > Secrets > Add
 
@@ -165,7 +166,7 @@ export-certificate crt-user1 export-passphrase="22058080"
 
 		Port: 51194
 
-		Mode: ip // ip=tun, ethernet=tap //
+		Mode: ip # ip=tun, ethernet=tap #
 
 		Protocol: tcp
 
@@ -195,7 +196,7 @@ export-certificate crt-user1 export-passphrase="22058080"
 
 		Action: accept
 
-// Vamos ao modelo de arquivo de configuração .ovpn.. //
+# Vamos ao modelo de arquivo de configuração .ovpn..
 
 client
 dev tun
@@ -212,15 +213,15 @@ verb 3
 route >>10.0.0.0<< 255.255.255.0 >>172.16.0.1<<
 
 <ca>
-// Colar aqui a CA. //
+# Colar aqui a CA. #
 </ca>
 
 <crt>
-// Colar aqui o Certificado do cliente. //
+# Colar aqui o Certificado do cliente. #
 </crt>
 
 <key>
-// 
+# 
 
 Colar aqui a chave privada do cliente com a senha assinada, vamos usar o OpenSSL.
 
@@ -228,5 +229,5 @@ Chamar o openssl.exe dentro da pasta com a .key não assinada. No Windows: atalh
 
 rsa -in >>NomeArquivo.key<< -out >>NovoNomeArquivo.key<<
 
-//
+#
 </key>

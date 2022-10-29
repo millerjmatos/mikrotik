@@ -1,10 +1,10 @@
-// Somente funciona para HTTP.  Modo Transparente.//
+# Somente funciona para HTTP.  Modo Transparente.
 
 	New Terminal
 
 /ip firewall nat add chain=dsnat protocol=tcp dst-port:80 action=redirect to-ports=8080
 
-// ou.. //
+# ou..
 
 	IP > Web Proxy
 
@@ -36,7 +36,7 @@
 
 		To Ports: 8080
 
-// Adicionando os domínios a serem filtrados. //
+# Adicionando os domínios a serem filtrados.
 
 	IP > Web Proxy > Access > Web Proxy Access > Add
 

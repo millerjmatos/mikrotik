@@ -1,8 +1,8 @@
-//Priorizando VoIP.//
+# Priorizando VoIP.#
 
-//Supondo que o nosso servidor VoIP é 200.155.174.203//
+# Supondo que o nosso servidor VoIP é 200.155.174.203#
 
-//Primeiro vamos marcar as conexões e por fim o pacote para então criar a fila de prioridade.//
+# Primeiro vamos marcar as conexões e por fim o pacote para então criar a fila de prioridade.
 
 	IP > Firewall > Mangle > Add
 

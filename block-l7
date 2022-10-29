@@ -4,7 +4,7 @@ New Terminal
 
 /ip firewall filter add action=drop chain=forward protocol=tcp comment="facebook" disabled=no dst-port=80,443 layer7-protocol=facebook
 
-// ou..
+# ou..
 
 	IP > Firewall  > Layer7 Protocols > Add
 

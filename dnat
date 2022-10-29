@@ -1,4 +1,4 @@
-// Ex. acessando via MS RDP: //
+# Ex. acessando via MS RDP:
 
 IP > Firewall > NAT > New NAT Rule
 
@@ -18,4 +18,6 @@ IP > Firewall > NAT > New NAT Rule
 
 		To Addresses: 10.0.0.199
 
-		To Ports: 3389 // Pode ficar vazio se for igual a porta "Dst. Port". //
+		To Ports: 3389 
+		
+# To Ports pode ficar vazio se for igual a porta "Dst. Port".

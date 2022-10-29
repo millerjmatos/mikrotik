@@ -2,7 +2,9 @@ IP > Firewall > Filter Rules > Add
 
 	General
 
-		Chain: forward // Tudo que passa pelo Firewall. //
+		Chain: forward 
+		
+	# Tudo que passa pelo Firewall.
 
 		Protocol: tcp
 

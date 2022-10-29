@@ -3,19 +3,19 @@
 # ISNTAGRAM @LEONARDOVIEIRA.COM.BR
 #
 
-#CRIA A INTERFACE LIST USADA NO FIREWALL
-#LEMBRE-SE DE ADD AS INTERFACES DAS OPERADORAS NA LSITA
+# CRIA A INTERFACE LIST USADA NO FIREWALL
+# LEMBRE-SE DE ADD AS INTERFACES DAS OPERADORAS NA LSITA
 /interface list add name=OPERADORAS
 
 
-#LAYER7
+# LAYER7
 /ip firewall layer7-protocol add name=Youtube regexp="^(.*)(youtube)(.*)\$"
 /ip firewall layer7-protocol add name=facebook regexp="^(.*)(facebook)(.*)\$"
 
-#AJUSTE TIMEOUT 
+# AJUSTE TIMEOUT 
 /ip firewall connection tracking set tcp-established-timeout=30m
 
-#FILTER INPUT
+# FILTER INPUT
 /ip firewall filter add action=accept chain=input comment="========================== Estabelecidos, Relacionados e ou Untracked" connection-state=established,related,untracked
 /ip firewall filter add action=drop chain=input comment="========================== Invalidas" connection-state=invalid
 /ip firewall filter add action=add-src-to-address-list address-list=port-scanners address-list-timeout=4w2d chain=input comment="========================== Pega Malandro" dst-port=3389,21-25 in-interface-list=OPERADORAS protocol=tcp
