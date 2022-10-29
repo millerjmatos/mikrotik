@@ -1,0 +1,97 @@
+    Wireless > Wireless Tables > <wlan1>
+
+        General
+
+            scan.. > Scanner (Running) > Start
+
+# Encontre e conecte na rede Wi-Fi disponivel:
+
+            Connect
+
+# Em Wireless Interfaces, verificar se a interface está Running (R)!
+
+# Autenticando:
+
+    Wireless > Wireless Tables > <wlan1>
+
+        Wireless
+
+# Todas os campos já estão configurados, atentar para o modo de operação:
+
+        Mode: station
+
+# O modo station na wireless não aceita bridge!!
+
+# Configurar com as informações definidas no roteador:
+
+    Wireless > Wireless Tables > Security Profiles > Add
+
+        Name: PERFIL-SEGURO
+
+		Mode: dynamic keys
+
+		Authentication Types: WPA2 PSK
+
+		Unicast Ciphers: aes ccm
+
+		Group Ciphers: aes ccm
+
+		WPA2 Pre-Shared Key: senhasegura!
+
+    Wireless > Wireless Tables > <wlan1>
+
+        Wireless
+
+            Security Profile: PERFIL-SEGURO
+
+# Modo station configurado com sucesso!
+
+# Para usar ethernet em modo station, é necessário fazer roteamento.. Não faremos!
+
+# Extendendo o sinal wireless via ethernet:
+
+# Criando o dhcp cliente na interface de saída:
+
+    IP > DHCP Client > + Add
+
+        Interface: eth2-LAN
+
+# Ainda não vai pegar IP!
+
+# Criando a bridge:
+
+    Bridge > Bridge > Add
+
+        General
+
+            Name: bridge-LAN
+
+# Adicionando a wlan1 + eth2-LAN na bridge-LAN:
+
+    Bridge > Ports > Add
+
+        New Bridge Port
+
+            Interface: eth2-LAN
+
+            Bridge: bridg-LAN
+
+        New Bridge Port
+
+            Interface: wlan1
+
+            Bridge: bridg-LAN
+
+# Com AP for de outro fabricante, devemos trocar o modo de operação!!
+
+# Trocando o modo de operação:
+
+    Wireless > Wireless Tables > <wlan1>
+
+        Wireless
+
+            Mode: station pseudobridge
+
+# Em Wireless Interfaces, verificar se a interface está Running (RS)!
+
+# Com AP da Mikrotik, o modo de operação é station-bridge!!

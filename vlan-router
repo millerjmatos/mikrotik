@@ -1,6 +1,6 @@
-// Criando a VLAN:
+# Criando a VLAN:
 
-// O procedimento é o mesmo para cada VLAN..
+# O procedimento é o mesmo para cada VLAN..
 
     Interfaces > VLAN > Add
 
@@ -12,17 +12,17 @@
 
                 VLAN ID: 10
 
-// Interface de saída para o outro mk (Tagged):
+# Interface de saída para o outro mk (Tagged):
                 
                 Interface: eth2-mk2
 
-// A mesma interface de saída/transporte pode ser usada para quantas VLANs desejar!
+# A mesma interface de saída/transporte pode ser usada para quantas VLANs desejar!
 
-// Criar a VLAN nos dois mk, atentar a interface de saída!
+# Criar a VLAN nos dois mk, atentar a interface de saída!
 
-// No mk1:
+# No mk1:
 
-// Definindo o IP de cada interface VLAN:
+# Definindo o IP de cada interface VLAN:
 
     IP > Addresses
 
@@ -36,7 +36,7 @@
 
                     IP > Addresses
 
-// No mk2:
+# No mk2:
 
         Addresses List > Add
 
@@ -46,15 +46,15 @@
 
                 Interface: VLAN10
 
-// No mk1..
+# No mk1..
 
-// Definindo os servidores dhcp para cada VLAN:
+# Definindo os servidores dhcp para cada VLAN:
 
     IP > DHCP SERVER > DHCP Setup
 
-// No mk2..
+# No mk2..
 
-// Criar a bridge:
+# Criar a bridge:
 
     Bridge > Bridge > Add
 
@@ -62,7 +62,7 @@
 
             Name: bridge10
 
-// Adicionando a interface Untagged e VLAN na bridge:
+# Adicionando a interface Untagged e VLAN na bridge:
 
     Bridge > Ports > Add
 

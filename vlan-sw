@@ -1,4 +1,4 @@
-// Criando a vlan:
+# Criando a vlan:
 
     Interfaces > VLAN > Add
 
@@ -10,7 +10,7 @@
 
                 VLAN ID: 200
 
-// Interface que vai para o switch:
+# Interface que vai para o switch:
                 
                 Interface: eth6-SW
 
@@ -24,11 +24,11 @@
 
                 Interface: vlan200-AZUL
 
-// Configurar o servidor DHCP na interface vlan200-AZUL.
+# Configurar o servidor DHCP na interface vlan200-AZUL.
 
     IP > DHCP SERVER > DHCP Setup
 
-// No switch vamos criar a bridge. //
+# No switch vamos criar a bridge.
 
     Bridge > Bridge > Add
 
@@ -36,15 +36,15 @@
 
             Name: bridge-LAN
 
-// Adicionando as interfaces (uma por uma) que fazem parte da bridge:
+# Adicionando as interfaces (uma por uma) que fazem parte da bridge:
 
     Bridge > Ports > Add
 
         New Bridge Port
 
-// Adicionando as interfaces da bridge na vlan que desejamos:
+# Adicionando as interfaces da bridge na vlan que desejamos:
 
-// Acesse a interface..
+# Acesse a interface..
 
     Bridge > Ports > Bridge Port
 
