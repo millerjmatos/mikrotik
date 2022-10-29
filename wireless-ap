@@ -56,9 +56,9 @@ _	CONFIGURAR AP
 
 		Bridge: bridge1
 
-//Configurar o DHCP client para a interface bridge1.//
+# Configurar o DHCP client para a interface bridge1.
 
-//Criando a rede de visitante://
+# Criando a rede de visitante:
 
 	Wireless > Security Profiles > Add
 
@@ -102,6 +102,6 @@ _	CONFIGURAR AP
 
 		Interface: WLAN2
 
-//Configurar o DHCP Server para a interface virtual WLAN2.//
+# Configurar o DHCP Server para a interface virtual WLAN2.
 
-//Configurar o srcnat para a interface de saída bridge1 como masquerade.//
+# Configurar o srcnat para a interface de saída bridge1 como masquerade.

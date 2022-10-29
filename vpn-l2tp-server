@@ -6,7 +6,7 @@ Bridge > Add
 
 	IP > Addresses > Add
 
-		Address: 172.16.0.1 // IP do concentrador da VPN. //
+		Address: 172.16.0.1 # IP do concentrador da VPN. #
 
 		Network: 172.16.0.0
 
@@ -18,13 +18,13 @@ Bridge > Add
 
 		Name: remote-l2tp
 
-		Addresses: 172.16.0.2-172.16.0.31 // Netmask: 255.255.255.224 = 27 //
+		Addresses: 172.16.0.2-172.16.0.31 # Netmask: 255.255.255.224 = 27 #
 
 	PPP > Profiles
 
 	PPP Profile <default-encryption>
 
-		Local Address: 172.16.0.1 //Loopback//
+		Local Address: 172.16.0.1 #Loopback#
 
 		Remote Address: remote-l2tp
 
@@ -52,22 +52,22 @@ Bridge > Add
 
 		Profile: default-encryption
 
-// COMO NAVEGAR NA INTERNET LOCAL NO WINDOWS //
+# COMO NAVEGAR NA INTERNET LOCAL NO WINDOWS #
 
 	Conexões de Rede
 
-// Botão direito no ícone da rede da VPN e ir em Propriedades. //
+# Botão direito no ícone da rede da VPN e ir em Propriedades. #
 
 	Rede > Protocolo IP Versão 4 (TCP/IPv4) > Propriedades > Avançado > Configurações IP
 
 		Utilizar gateway padrão em rede remota: NO
 
-// Criar a rota no cmd do Windows como Administrador: //
+# Criar a rota no cmd do Windows como Administrador: #
 
 	route add 10.0.0.0 mask 255.255.255.0 172.16.0.1 -p
 
-//	route add <rede de destino> <gateway de destino "Loopback | Local Address"> //
+#	route add <rede de destino> <gateway de destino "Loopback | Local Address"> #
 
-	route print // Listando as rotas. //
+	route print # Listando as rotas. #
 
 	route delete "IP da rede"
