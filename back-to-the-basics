@@ -1,5 +1,5 @@
 ------------------------------------------------------------
-_	TROCAR LOGIN E SENHA
+#	TROCAR LOGIN E SENHA
 ------------------------------------------------------------
 
 	System > Users
@@ -7,7 +7,7 @@ _	TROCAR LOGIN E SENHA
 		Group: full
 
 ------------------------------------------------------------
-_	ATUALIZAR O SISTEMA
+#	ATUALIZAR O SISTEMA
 ------------------------------------------------------------
 
 	System > Packages > Package List > Check For Updates
@@ -17,7 +17,7 @@ _	ATUALIZAR O SISTEMA
 	Check For Uodates > Download&Install
 
 ------------------------------------------------------------
-_	RESTRINGINDO ACESSO
+#	RESTRINGINDO ACESSO
 ------------------------------------------------------------
 
 	IP > Services > IP Service List
@@ -31,7 +31,7 @@ _	RESTRINGINDO ACESSO
 	Available From: 10.0.0.0/24 # Apenas para a rede LAN!!! #
 
 ------------------------------------------------------------
-_	RENOMEAR INTERFACES
+#	RENOMEAR INTERFACES
 ------------------------------------------------------------
 
 	New Terminal
@@ -49,7 +49,7 @@ _	RENOMEAR INTERFACES
 /interface ethernet export
 
 ------------------------------------------------------------
-_	CRIANDO A LISTAS DE INTERFACES
+#	CRIANDO A LISTAS DE INTERFACES
 ------------------------------------------------------------
 
 /interface list add name=FORNECEDORES
@@ -73,7 +73,7 @@ _	CRIANDO A LISTAS DE INTERFACES
 		Interface: eth4-algar
 
 ------------------------------------------------------------
-_	ATRIBUIR IP (LAN)
+#	ATRIBUIR IP (LAN)
 ------------------------------------------------------------
 
 	IP > Addresses > Add
@@ -85,7 +85,7 @@ _	ATRIBUIR IP (LAN)
 		Interface: eth1-lan
 
 ------------------------------------------------------------
-_	SNAT
+#	SNAT
 ------------------------------------------------------------
 
 // No modo DHCP: //
@@ -101,7 +101,7 @@ _	SNAT
 		Action: masquerade
 
 ------------------------------------------------------------
-_	Cliente NTP
+#	Cliente NTP
 ------------------------------------------------------------
 
 	System > NTP Client
