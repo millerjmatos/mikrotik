@@ -7,14 +7,26 @@
 		Group: full
 
 ------------------------------------------------------------
-#	ATUALIZAR O SISTEMA
+#	IDENTIFICAÇÃO DO ROTEADOR
 ------------------------------------------------------------
 
-	System > Packages > Package List > Check For Updates
+	System > Identity
 
-	Channel: stable
+------------------------------------------------------------
+#	RENOMEAR INTERFACES
+------------------------------------------------------------
 
-	Check For Uodates > Download&Install
+	New Terminal
+
+	/interface ethernet set [ find default-name=ether1 ] name=eth1-lan
+	/interface ethernet set [ find default-name=ether2 ] name=eth2-provedor1
+	/interface ethernet set [ find default-name=ether3 ] disabled=yes name=eth3
+	/interface ethernet set [ find default-name=ether4 ] name=eth4-provedor2
+	/interface ethernet set [ find default-name=ether5 ] disabled=yes name=eth5
+
+# Descobrindo o nome das portas físicas ethernet:
+
+	/interface ethernet export
 
 ------------------------------------------------------------
 #	RESTRINGINDO ACESSO
@@ -31,22 +43,14 @@
 	Available From: 10.0.0.0/24 # Apenas para a rede LAN!!! #
 
 ------------------------------------------------------------
-#	RENOMEAR INTERFACES
+#	ATUALIZAR O SISTEMA
 ------------------------------------------------------------
 
-	New Terminal
+	System > Packages > Package List > Check For Updates
 
-# Exemplo: #
+	Channel: stable
 
-/interface ethernet set [ find default-name=ether1 ] name=eth1-lan
-/interface ethernet set [ find default-name=ether2 ] name=eth2-mvox
-/interface ethernet set [ find default-name=ether3 ] disabled=yes name=eth3
-/interface ethernet set [ find default-name=ether4 ] name=eth4-algar
-/interface ethernet set [ find default-name=ether5 ] disabled=yes name=eth5
-
-# Descobrindo o nome das portas físicas ethernet: #
-
-/interface ethernet export
+	Check For Uodates > Download&Install
 
 ------------------------------------------------------------
 #	CRIANDO A LISTAS DE INTERFACES
@@ -62,7 +66,7 @@
 
 		List: FORNECEDORES
 
-		Interface: eth2-mvox
+		Interface: eth2-provedor1
 
 	Interfaces > Interface List > Add
 
@@ -70,7 +74,7 @@
 
 		List: FORNECEDORES
 
-		Interface: eth4-algar
+		Interface: eth4-provedor2
 
 ------------------------------------------------------------
 #	ATRIBUIR IP (LAN)
@@ -104,13 +108,15 @@
 #	Cliente NTP
 ------------------------------------------------------------
 
-	System > NTP Client
+	System > SNTP Client
 
 		Enabled: OK
 
 		Mode: unicast
 
-		NTP Server: gps.ntp.br
+		Primary NTP Server: a.ntp.br
+
+		Secondary NTP Server: b.ntp.br
 
 	System > NTP Server
 
