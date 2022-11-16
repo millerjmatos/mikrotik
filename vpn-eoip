@@ -1,0 +1,78 @@
+#   IP Matriz: 200.1.1.1
+
+#   IP Filial: 200.2.2.2
+
+#   No MK Matriz:
+
+    Interfaces > EoIP Tunnel > Add
+
+        Name: eoip-Matriz
+
+        Remote Address: 200.2.2.2
+
+        Tunnel ID: 2000
+
+#   Definindo IP ao tunel:
+
+    IP > Addresses > Add
+
+        Address: 10.80.80.1/30
+
+        Interface: eoip-Matriz
+
+#   Definindo a rota para a rede LAN de destino:
+
+    IP > Routes > Add
+
+        Dst. Address: 192.168.2.0/24
+
+        Gateway: 10.80.80.2
+
+#   No MK da Filial:
+
+    Interfaces > EoIP Tunnel > Add
+
+        Name: eoip-Matriz
+
+        Remote Address: 200.1.1.1
+
+        Tunnel ID: 2000
+
+#   Definindo IP ao tunel:
+
+    IP > Addresses > Add
+
+        Address: 10.80.80.2/30
+
+        Interface: eoip-Matriz
+
+#   Definindo a rota para a rede LAN de destino:
+
+    IP > Routes > Add
+
+        Dst. Address: 192.168.1.0/24
+
+        Gateway: 10.80.80.1
+
+#   Configurando o IPSec..
+
+#   No MK Matriz:
+
+    Interfaces > EoIP Tunnel > <eoip-Matriz>
+
+        Local Address: 200.1.1.1
+
+        IPsec: B8S70P1q1amFzEFRwc7xVvf5bqEqfUBriQguLni9G9KaoVVABtcOREK7Re4rQNXS
+
+        Allow Fast Path: Disable
+
+#   No MK Filial:
+
+    Interfaces > EoIP Tunnel > <eoip-Matriz>
+
+        Local Address: 200.2.2.2
+
+        IPsec: B8S70P1q1amFzEFRwc7xVvf5bqEqfUBriQguLni9G9KaoVVABtcOREK7Re4rQNXS
+
+        Allow Fast Path: Disable
+
