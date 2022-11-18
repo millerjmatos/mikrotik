@@ -1,0 +1,43 @@
+# Laboratório com 2 links e 2 redes locais.
+
+# Rede local A: 192.168.1.0/24 saindo pela gvt.
+
+# Rede local B: 192.168.2.0/24 saindo pela algar.
+
+# Criando novas tabelas de roteamento:
+
+    IP > Routes > Add
+
+    General
+
+        Dst. Address: 0.0.0.0/24
+
+        Gateway: 10.10.10.1
+
+        Rounting Mark: roteamento-link-gvt
+    
+    Route List > Rules > Add
+
+    New Policy Routing Rule
+
+        Src. Address: 192.168.1.0/24
+
+        Table: roteamento-link-gvt
+
+    IP > Routes > Add
+
+    General
+
+        Dst. Address: 0.0.0.0/24
+
+        Gateway: 192.168.0.1
+
+        Rounting Mark: roteamento-link-algar
+
+    Route List > Rules > Add
+
+    New Policy Routing Rule
+
+        Src. Address: 192.168.2.0/24
+
+        Table: roteamento-link-algar
