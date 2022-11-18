@@ -1,0 +1,18 @@
+IP > Firewall > Add
+
+    Filter Rules
+
+    General
+
+        Chain: Forward
+
+        Connection State: 
+
+            established: OK
+
+            related: OK
+    
+    Action
+
+        Action: fasttrack connection
+
