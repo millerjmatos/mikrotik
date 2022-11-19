@@ -1,0 +1,129 @@
+IP > Pool > Add
+
+    New IP Pool
+
+        Name: pool-sstp
+
+        Addresses: 10.11.11.2-10.11.11.30
+
+PPP > Profiles > Add
+
+    General
+
+        Name: profile-sstp
+
+        Local Address: 10.11.11.1
+
+        Remote Address: pool-sstp
+
+    Secrets > Add
+
+        Name: user
+
+        Password: t01cydfEVDJ9trAE
+
+        Service: sstp
+
+        Profile: profile-sstp
+
+    Interface > SSTP Server
+
+        Enabled: OK
+
+        Port: 14443
+
+        Authentication: mschap2 mschap1
+
+        Default Profile: profile-sstp
+
+System > Certificates > Add
+
+    General
+
+        Name: ca-sstp
+
+        Common Name: 123456789012.sn.mynetname.net
+
+        Key Size: 2048
+
+        Days Valid: 3650
+
+    Key Usage
+
+        crl sign
+
+        key cert. sign
+
+        > Apply
+
+    Status
+
+        Sign
+
+            Certificate: ca-sstp
+
+            CA CRL Host: 123456789012.sn.mynetname.net
+
+            > Start
+
+            > Close
+
+System > Certificates > Add
+
+    General
+
+        Name: server-sstp
+
+        Common Name: 123456789012.sn.mynetname.net
+
+        Key Size: 2048
+
+        Days Valid: 3650
+
+    Key Usage
+
+        digital signature
+
+        key encipherment
+
+        tls server
+
+        > Apply
+
+    Status
+
+        Sign
+
+            Certificate: server-sstp
+
+            CA CRL Host: ca-sstp
+
+            > Start
+
+            > Close
+
+    General
+
+        Trusted: OK
+
+System > Certificates
+
+    KLAT    ca-sstp
+
+        > Export
+
+            Certificate: ca-sstp
+
+            Type: PEM
+
+            > Export
+
+PPP > Interface > SSTP Server
+
+    Certificate: server-sstp
+
+Files
+
+# Baixar o .crt file para o cliente.
+
+# Configure a VPN no cliente Windows e instale o certificado ca.
