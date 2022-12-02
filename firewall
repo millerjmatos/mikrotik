@@ -46,6 +46,7 @@
 #
 /ip firewall filter add action=accept chain=forward comment="Allow C-State ESTABLISHED RELATED" connection-state=established,related
 /ip firewall filter add action=drop chain=forward comment="Drop C-State INVALID" connection-state=invalid
+/ip firewall filter add action=drop chain=forward comment="Drop Dst. BOGONS" dst-address-list=not_in_internet
 /ip firewall filter add action=drop chain=forward comment="Drop ALL FROM WAN NOT DSNAT" connection-nat-state=!dstnat in-interface-list=FORNECEDORES
 #
 /ip settings set tcp-syncookies=yes
