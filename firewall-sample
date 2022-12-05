@@ -1,7 +1,8 @@
+#=================================================
+# Desenvolvido por Leonardo Viera
 # MIKROTIK DO ZERO AO AVANCADO - HACKONE
-# PROFESSOR LEONARDO VIEIRA
 # ISNTAGRAM @LEONARDOVIEIRA.COM.BR
-#
+#=================================================
 
 # CRIA A INTERFACE LIST USADA NO FIREWALL
 # LEMBRE-SE DE ADD AS INTERFACES DAS OPERADORAS NA LSITA
