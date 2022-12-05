@@ -1,0 +1,79 @@
+CAPsMAN > CAP Interface > Manager
+
+    Enabled: OK
+
+    Certificate: auto
+
+    CA Certificate: auto
+
+Bridge > Add
+
+    Name: bridge-ap
+
+Interfaces > VLAN > Add
+
+    General
+
+        Name: vlan-adm
+
+        VLAN ID: 1000
+
+        Interface: bridge-ap
+
+Interfaces > VLAN > Add
+
+    General
+
+        Name: vlan-visitante
+
+        VLAN ID: 1200
+
+        Interface: bridge-ap
+
+#   Adicione uma outra rede IP, DHCP Server sobre as interfaces VLANs!
+
+#   Configure o NAT para as redes desejadas!!
+
+Firewall > NAT > Add
+
+    General
+
+        Chain: srcnat
+
+    Advanced
+
+        Src. Address List: WIFI-NETWORK
+
+    Action
+
+        Action: masquerade
+
+# Defina em "CAPsMAN > Configurations" (SSID, Country, Channel, Passphrase) para cada rede!
+
+# Em Datapath, atentar para:
+
+    Datapath
+
+    Bridge: bridge-ap
+
+    VLAN MODE: use tag
+
+    VLAN ID: 1200
+
+# Criar uma CAP Interface do tipo estática e posteriomente defini-la como Master Interface!! 
+
+# Copiando e renomeando a interface dinâmica, em seguida, removendo a anterior (SMB).
+
+# Por último criar a nova interface virtual:
+
+CAPsMAN > CAP Interface > Add
+
+    General
+
+        Master Interface: CONFIG1
+
+    Wireless
+
+        Configuration:  VISITANTE
+
+# Atentar para o Datapath, que deve estar com a Bridge e VLAN configurados!
