@@ -60,6 +60,16 @@ Firewall > NAT > Add
 
     VLAN ID: 1200
 
+# Criar o provisionamento para cada rede:
+
+CAPsMAN > Provisioning > Add
+
+    Action: create dynamic enabled
+
+    Master Configuration: CONFIG1
+
+# Outras redes virtuais, não master, especifique a nova configuração de provisionamento em Slave Configuration.
+
 # Criar uma CAP Interface do tipo estática e posteriomente defini-la como Master Interface!! 
 
 # Copiando e renomeando a interface dinâmica, em seguida, removendo a anterior (SMB).
