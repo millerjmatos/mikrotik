@@ -68,6 +68,8 @@ CAPsMAN > Provisioning > Add
 
     Master Configuration: CONFIG1
 
+# Action: "create enabled" para a criação da interface estática.
+
 # Outras redes virtuais, não master, especifique a nova configuração de provisionamento em Slave Configuration.
 
 # Criar uma CAP Interface do tipo estática e posteriomente defini-la como Master Interface!! 
@@ -86,4 +88,4 @@ CAPsMAN > CAP Interface > Add
 
         Configuration:  VISITANTE
 
-# Atentar para o Datapath, que deve estar com a Bridge e VLAN configurados!
+# Atentar para o Datapath, que deve estar com a Bridge e VLAN configurados (SB)!
