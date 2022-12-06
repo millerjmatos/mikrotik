@@ -1,4 +1,4 @@
-# Criando a VLAN:
+# Criando a VLAN no mk1:
 
 # O procedimento é o mesmo para cada VLAN..
 
@@ -8,19 +8,17 @@
         
             General
 
-                Name: VLAN10
+                Name: vlan10-eth2
 
                 VLAN ID: 10
 
-# Interface de saída para o outro mk (Tagged):
+# Interface de saída para o outro mk (TAGGED):
                 
                 Interface: eth2-mk2
 
 # A mesma interface de saída/transporte pode ser usada para quantas VLANs desejar!
 
 # Criar a VLAN nos dois mk, atentar a interface de saída!
-
-# No mk1:
 
 # Definindo o IP de cada interface VLAN:
 
@@ -32,11 +30,17 @@
 
                 Address: 10.10.10.1/24
 
-                Interface: VLAN10
+                Interface: vlan10-eth2
 
                     IP > Addresses
 
+# Definindo os servidores dhcp para cada VLAN:
+
+    IP > DHCP SERVER > DHCP Setup
+
 # No mk2:
+
+    IP > Addresses
 
         Addresses List > Add
 
@@ -44,15 +48,7 @@
 
                 Address: 10.10.10.2/24
 
-                Interface: VLAN10
-
-# No mk1..
-
-# Definindo os servidores dhcp para cada VLAN:
-
-    IP > DHCP SERVER > DHCP Setup
-
-# No mk2..
+                Interface: vlan10-eth2
 
 # Criar a bridge:
 
@@ -60,9 +56,9 @@
 
         General
 
-            Name: bridge10
+            Name: bridge-vlan10
 
-# Adicionando a interface Untagged e VLAN na bridge:
+# Adicionando a interface UNTAGGED e VLAN na bridge:
 
     Bridge > Ports > Add
 
@@ -70,15 +66,15 @@
 
             Interface: eth1-pc10
 
-            Bridge: bridge10
+            Bridge: bridge-vlan10
 
     Bridge > Ports > Add
 
         New Bridge Port
 
-            Interface: VLAN10
+            Interface: vlan10-eth2
 
-            Bridge: bridge10
+            Bridge: bridge-vlan10
 
     Bridge > Ports > Add
 
@@ -86,7 +82,7 @@
 
             Interface: eth2-pc20
 
-            Bridge: bridge20
+            Bridge: bridge-vlan20
 
     Bridge > Ports > Add
 
@@ -94,4 +90,4 @@
 
             Interface: VLAN20
 
-            Bridge: bridge20
+            Bridge: bridge-vlan20
