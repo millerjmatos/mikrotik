@@ -40,16 +40,6 @@
 
 # No mk2:
 
-    IP > Addresses
-
-        Addresses List > Add
-
-            New Address
-
-                Address: 10.10.10.2/24
-
-                Interface: vlan10-eth2
-
 # Criar a bridge:
 
     Bridge > Bridge > Add
