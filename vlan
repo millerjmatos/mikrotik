@@ -8,19 +8,20 @@
         
             General
 
-                Name: vlan10-eth2
+                Name: vlan100-eth3
 
-                VLAN ID: 10
+                VLAN ID: 100
 
 # Interface de saída para o outro mk (TAGGED):
                 
-                Interface: eth2-mk2
+                Interface: eth3-mk2
 
-# A mesma interface de saída/transporte pode ser usada para quantas VLANs desejar!
+# A mesma interface física de saída pode ser usada para muitas VLANs ao mesmo tempo.
 
-# Criar a VLAN nos dois mk, atentar a interface de saída!
+# Criar a VLAN também no mk2, com mesmo VLAN ID, e atentar para a interface física de saída (TAGGED)!
+# Ex: eth1-mk1
 
-# Definindo o IP de cada interface VLAN:
+# Definindo o IP de cada interface VLAN no mk1:
 
     IP > Addresses
 
@@ -30,7 +31,7 @@
 
                 Address: 10.10.10.1/24
 
-                Interface: vlan10-eth2
+                Interface: vlan100-eth3
 
                     IP > Addresses
 
@@ -46,38 +47,48 @@
 
         General
 
-            Name: bridge-vlan10
+            Name: bridge-vlan100
 
-# Adicionando a interface UNTAGGED e VLAN na bridge:
-
-    Bridge > Ports > Add
-
-        New Bridge Port
-
-            Interface: eth1-pc10
-
-            Bridge: bridge-vlan10
+# Adicionar a interface UNTAGGED e VLAN na mesma bridge:
 
     Bridge > Ports > Add
 
         New Bridge Port
 
-            Interface: vlan10-eth2
+            Interface: eth2-vlan100
 
-            Bridge: bridge-vlan10
-
-    Bridge > Ports > Add
-
-        New Bridge Port
-
-            Interface: eth2-pc20
-
-            Bridge: bridge-vlan20
+            Bridge: bridge-vlan100
 
     Bridge > Ports > Add
 
         New Bridge Port
 
-            Interface: VLAN20
+            Interface: vlan100-eth1
 
-            Bridge: bridge-vlan20
+            Bridge: bridge-vlan100
+
+# Para outras VLANs a mesma configuração:
+
+    Bridge > Ports > Add
+
+        New Bridge Port
+
+            Interface: eth5-vlan250
+
+            Bridge: bridge-vlan250
+
+    Bridge > Ports > Add
+
+        New Bridge Port
+
+            Interface: vlan250-eth1
+
+            Bridge: bridge-vlan250
+
+# Nesse exemplo, o esquema das interfaces no mk2 (SW) ficou assim:
+
+eth1-mk1-tagged-interface
+    vlan100-eth1
+    vlan250-eth1
+eth2-vlan100-untagged-interface
+eth5-vlan250-untagged-interface
