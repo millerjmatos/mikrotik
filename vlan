@@ -89,8 +89,8 @@
 
 # Nesse exemplo, o esquema das interfaces no mk2 (SW) ficou assim:
 
-eth1-mk1-tagged-interface
-    vlan100-eth1
-    vlan250-eth1
-eth2-vlan100-untagged-interface
-eth5-vlan250-untagged-interface
+    eth1-mk1-tagged-interface
+        vlan100-eth1
+        vlan250-eth1
+    eth2-vlan100-untagged-interface
+    eth5-vlan250-untagged-interface
