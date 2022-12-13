@@ -39,6 +39,8 @@
 
     IP > DHCP SERVER > DHCP Setup
 
+# Não esquecer do NAT!
+
 # No mk2:
 
 # Criar a bridge:
