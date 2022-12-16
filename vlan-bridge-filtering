@@ -64,7 +64,7 @@
 
             PVID: 200
 
-# Se ambas as portas forem TAGGED não é preciso PVID!
+# Portas TAGGED não é preciso PVID!
 
 # Adicionando as interfaces da bridge na vlan:
 
