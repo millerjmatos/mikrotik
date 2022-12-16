@@ -1,4 +1,6 @@
-# Criando a vlan:
+# Criando a VLAN no mk1:
+
+# O procedimento é o mesmo para cada VLAN..
 
     Interfaces > VLAN > Add
 
@@ -6,13 +8,17 @@
         
             General
 
-                Name: vlan200-AZUL
+                Name: eth6-vlan200
 
                 VLAN ID: 200
 
-# Interface que vai para o switch:
+# Interface conectada com o outro mk TAGGED:
                 
-                Interface: eth6-SW
+                Interface: eth6-sw
+
+# A mesma interface física pode ser usada para múltiplas VLANs simultaneamente.
+
+# Definir o IP de cada interface VLAN no roteador:
 
     IP > Addresses
 
@@ -20,43 +26,53 @@
 
             New Address
 
-                Address: 10.200.200.1/24
+                Address: 172.16.200.1/24
 
-                Interface: vlan200-AZUL
+                Interface: eth6-vlan200
 
-# Configurar o servidor DHCP na interface vlan200-AZUL.
+                    IP > Addresses
+
+# Não esquecer da regra do NAT!!
+
+# Definindo os servidores dhcp para cada VLAN:
 
     IP > DHCP SERVER > DHCP Setup
 
-# No switch vamos criar a bridge.
+# Atentar para a interface conectada TAGGED! (Exemplo: eth1-router)
+
+# Criar a bridge:
 
     Bridge > Bridge > Add
 
         General
 
-            Name: bridge-LAN
+            Name: bridge-vlan
+        
+        VLAN
+
+            VLAN Filtering: enable
 
 # Adicionando as interfaces (uma por uma) que fazem parte da bridge:
 
     Bridge > Ports > Add
 
-        New Bridge Port
+# Para as portas UNTAGGED, acesse a interface e defina o PVID correspondente:
 
-# Adicionando as interfaces da bridge na vlan que desejamos:
-
-# Acesse a interface..
-
-    Bridge > Ports > Bridge Port
+    Bridge > Ports > Bridge Port <interface>
 
         VLAN
 
             PVID: 200
 
+# Se ambas as portas forem TAGGED não é preciso PVID!
+
+# Adicionando as interfaces da bridge na vlan:
+
     Bridge > VLANs > Add
 
         New Bridge VLAN
 
-            Bridge: bridge-LAN
+            Bridge: bridge-vlan200
 
             VLAN IDs: 200
 
@@ -64,9 +80,3 @@
 
             Untagged:   eth8-pc4
                         eth9-pc3
-
-    Bridge > bridge-LAN
-        
-        VLAN
-
-            VLAN Filtering: enable
