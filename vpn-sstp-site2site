@@ -1,0 +1,59 @@
+PPP > Secrets > Add
+
+        Name: filial-rj
+
+        Password: t01cydfEVDJ9trAE
+
+        Service: sstp
+
+        Profile: default
+
+# IP do tunel..
+
+        Local Address: 10.30.30.1
+
+# IP do gateway da filial..
+
+        Remote Address: 10.30.30.2
+
+# Criando a rota da Matriz para alcançar a rede da Filial..
+
+        Routes: 192.168.2.0/24 10.30.30.2
+
+    Interface > SSTP Server
+
+        Enabled: OK
+
+        Port: 443
+
+        Authentication: mschap2 mschap1
+
+        Default Profile: default
+
+# No mk2..
+
+PPP > SSTP Client
+
+    General
+
+        Name: sstp-matriz
+
+    Dial Out
+
+        Connect To: 123456789012.sn.mynetname.net
+
+        Port: 443
+
+        User: filial-rj
+
+        Password: t01cydfEVDJ9trAE
+
+        Allow: mschap2 mschap1
+
+IP > Routes
+
+    General
+
+        Dst. Address: 192.168.1.0/24
+
+        Gateway: 10.30.30.1
