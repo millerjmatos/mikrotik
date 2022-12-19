@@ -1,0 +1,26 @@
+# Criando:
+
+New Terminal
+
+/certificate
+add name=CA common-name=CA key-usage=key-cert-sign,crl-sign
+add name=CRT-Server common-name=CRT-server
+add name=CRT-Client common-name=CRT-client
+
+# Assinando:
+
+/certificate
+
+sign CA
+sign CRT-Client     
+sign CRT-Server
+
+# Exportando:
+
+/certificate 
+
+export-certificate CA
+export-certificate CRT-Server
+export-certificate CRT-Client
+
+Files > Download
