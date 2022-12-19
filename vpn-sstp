@@ -1,32 +1,20 @@
-IP > Pool > Add
-
-    New IP Pool
-
-        Name: pool-sstp
-
-        Addresses: 10.11.11.2-10.11.11.30
-
-PPP > Profiles > Add
-
-    General
-
-        Name: profile-sstp
-
-        Local Address: 10.11.11.1
-
-        Remote Address: pool-sstp
-
-    Secrets > Add
+PPP > Secrets > Add
 
         Name: user
 
-        Password: t01cydfEVDJ9trAE
+        Password: 12345678
 
         Service: sstp
 
-        Profile: profile-sstp
+# IP do tunel..
 
-    Interface > SSTP Server
+        Local Address: 10.30.30.1
+
+# IP do gateway da filial..
+
+        Remote Address: 10.30.30.2
+
+Interface > SSTP Server
 
         Enabled: OK
 
@@ -34,13 +22,15 @@ PPP > Profiles > Add
 
         Authentication: mschap2 mschap1
 
-        Default Profile: profile-sstp
+# Voltaremos aqui para especificar o certificado do servidor, no momento "none"!!
+
+        Certificate: CRT-Server
 
 System > Certificates > Add
 
     General
 
-        Name: ca-sstp
+        Name: CA
 
         Common Name: 123456789012.sn.mynetname.net
 
@@ -60,7 +50,7 @@ System > Certificates > Add
 
         Sign
 
-            Certificate: ca-sstp
+            Certificate: CA
 
             CA CRL Host: 123456789012.sn.mynetname.net
 
@@ -72,7 +62,7 @@ System > Certificates > Add
 
     General
 
-        Name: server-sstp
+        Name: CRT-Server
 
         Common Name: 123456789012.sn.mynetname.net
 
@@ -94,9 +84,9 @@ System > Certificates > Add
 
         Sign
 
-            Certificate: server-sstp
+            Certificate: CRT-Server
 
-            CA CRL Host: ca-sstp
+            CA: CA
 
             > Start
 
@@ -108,11 +98,11 @@ System > Certificates > Add
 
 System > Certificates
 
-    KLAT    ca-sstp
+    KLAT    CA
 
         > Export
 
-            Certificate: ca-sstp
+            Certificate: CA
 
             Type: PEM
 
@@ -120,10 +110,8 @@ System > Certificates
 
 PPP > Interface > SSTP Server
 
-    Certificate: server-sstp
+    Certificate: CRT-Server
 
-Files
+Files > Download
 
-# Baixar o .crt file para o cliente.
-
-# Configure a VPN no cliente Windows e instale o certificado ca.
+# Configure a VPN no cliente Windows e instale o certificado CA.

@@ -3,9 +3,9 @@
 New Terminal
 
 /certificate
-add name=CA common-name=CA key-usage=key-cert-sign,crl-sign
-add name=CRT-Server common-name=CRT-server
-add name=CRT-Client common-name=CRT-client
+add name=CA common-name=ca key-usage=key-cert-sign,crl-sign
+add name=CRT-Server common-name=crt-server
+add name=CRT-Client common-name=crt-client
 
 # Assinando:
 
