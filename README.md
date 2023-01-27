@@ -1,5 +1,5 @@
 ## MikroTik
-Site: https://MikroTik.com/
+Site: https://mikrotik.com/
 
 O MikroTik é uma empresa de tecnologia de rede que fornece soluções de hardware e software avançadas para roteamento, comutação e wireless. O sistema operacional RouterOS é o coração dessa tecnologia, proporcionando uma ampla variedade de recursos e opções de configuração para garantir que sua rede esteja sempre funcionando da melhor maneira possível.
 
